@@ -1,0 +1,44 @@
+version : "3.8"
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    restart: always
+    ports: 
+      - '8080:80'
+    depends_on:
+      - node
+    networks:
+      - desafio-network
+
+  node:
+    build:
+      context: ./node   
+    container_name: node
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - desafio-network
+
+  mysql:
+    build:
+      context: ./mysql
+    container_name: mysql
+    restart: always
+    tty: true
+#    ports:
+#      - "3306:3306"
+    networks:
+      - desafio-network
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=desafio
+      - MYSQL_ROOT_PASSWORD=123mudar@
+    
+networks:
+  desafio-network:
+    driver: bridge    

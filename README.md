@@ -5,4 +5,4 @@ git clone https://github.com/vicentebleonel/desafio-docker-nginx.git
 
 cd desafio-docker-nginx
 
-docker-compose up [-d]
+docker-compose up -d
